@@ -4,16 +4,15 @@ process.env.TEST_DATABASE = './test/test.sqlite';
 const expect = require('chai').expect;
 const request = require('supertest');
 const sqlite3 = require('sqlite3');
-
-const app = require('../server.js');
+const app = require('../server');
 const seed = require('./seed.js');
 
 const prodDb = new sqlite3.Database('./database.sqlite');
 let testDb = new sqlite3.Database(process.env.TEST_DATABASE);
 
-describe('Artist Table', function() {
+describe('Artists Table', function() {
   it('should exist', function(done) {
-    prodDb.get("SELECT name FROM sqlite_master WHERE type='table' AND name='Artist'", (error, table) => {
+    prodDb.get("SELECT name FROM sqlite_master WHERE type='table' AND name='Artists'", (error, table) => {
       if (error || !table) {
         done(new Error(error || 'Artist table not found'));
       }

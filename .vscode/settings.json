@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder}/database.sqlite",
+            "dialect": "SQLite",
+            "name": "DataBase"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

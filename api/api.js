@@ -1,5 +1,5 @@
 const express = require('express');
 const apiRouter = express.Router();
-const artistsRouter = require('./api/artists');
+const artistsRouter = require('./artists');
 module.exports = apiRouter;
 
