@@ -31,6 +31,30 @@ artistsRouter.param('artistId', (req,res,next,artistId) => {
 
 artistsRouter.get('/:artistId', (req,res,next) => {
     res.status(200).json({artist: req.artistData});
+});
+
+artistsRouter.post('/', (req,res,next) => {
+    let name = req.body.artist.name , dateOfBirth = req.body.artist.dateOfBirth, biography = req.body.artist.biography;
+    let isCurrentlyEmployed = req.body.artist.isCurrentlyEmployed === 0 ? 0 : 1; 
+    if (!name || !dateOfBirth || !biography) {
+        return res.status(400).send();
+    }
+
+    let query = "INSERT INTO Artist (name,date_of_birth, biography, is_currently_employed) VALUES ($name, $dateOfBirth, $biography, $isCurrentlyEmployed);"
+    let data = {$name: name, $dateOfBirth: dateOfBirth, $biography: biography, $isCurrentlyEmployed: isCurrentlyEmployed }
+    db.run(query, data, function (err) { 
+        if (err) {
+            next(err);
+        }
+        db.get("SELECT * FROM Artist WHERE Artist.id=$id;", {$id: this.lastID}, (err, artistData) => {
+            if (err) {
+                next(err);
+            }
+            else if (artistData) {
+                res.status(201).json({artist: artistData});
+            }
+    });
+})
 })
 
 
