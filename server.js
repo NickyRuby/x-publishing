@@ -10,10 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 4001;
 
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 app.use(morgan('tiny'));
 // app.use(errorHandler());
-app.use(express.static('public'));
 
 app.use('/api', apiRouter);
 app.use('/api/artists', artistsRouter);

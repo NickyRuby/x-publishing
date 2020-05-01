@@ -18,3 +18,4 @@ CREATE TABLE IF NOT EXISTS Artist (
     }
 });
 
+db.run("INSERT INTO Artist (name,date_of_birth, biography, is_currently_employed) VALUES (1,'nikita', '4/3/1996', 'test', 1);");
