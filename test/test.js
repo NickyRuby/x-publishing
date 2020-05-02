@@ -12,7 +12,7 @@ let testDb = new sqlite3.Database(process.env.TEST_DATABASE);
 
 describe('Artists Table', function() {
   it('should exist', function(done) {
-    prodDb.get("SELECT name FROM sqlite_master WHERE type='table' AND name='Artists'", (error, table) => {
+    prodDb.get("SELECT name FROM sqlite_master WHERE type='table' AND name='Artist'", (error, table) => {
       if (error || !table) {
         done(new Error(error || 'Artist table not found'));
       }

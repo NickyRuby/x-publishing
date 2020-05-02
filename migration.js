@@ -18,4 +18,19 @@ CREATE TABLE IF NOT EXISTS Artist (
     }
 });
 
-db.run("INSERT INTO Artist (name,date_of_birth, biography, is_currently_employed) VALUES (1,'nikita', '4/3/1996', 'test', 1);");
+// db.run("INSERT INTO Artist (name,date_of_birth, biography, is_currently_employed) VALUES (1,'nikita', '4/3/1996', 'test', 1);");
+
+db.run(`
+CREATE TABLE IF NOT EXISTS Series (
+    id INTEGER NOT NULL, 
+    name TEXT NOT NULL, 
+    description TEXT NOT NULL,
+    PRIMARY KEY ('id'));
+`, function (err) {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        console.log('Table Series created');
+    }
+});

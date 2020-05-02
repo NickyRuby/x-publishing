@@ -4,6 +4,7 @@ const errorHandler = require('error-handler');
 const morgan = require('morgan');
 const express = require('express');
 const apiRouter = require('./api/api.js');
+const seriesRouter = require('./api/series');
 const artistsRouter = require('./api/artists')
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(morgan('tiny'));
 
 app.use('/api', apiRouter);
 app.use('/api/artists', artistsRouter);
+app.use('/api/series', seriesRouter)
 
 app.listen(PORT, () => {
     console.log('Im listening on ' + PORT);

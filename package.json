@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "timeout" : "mocha --timeout 15000"
   },
   "author": "",
   "license": "ISC",
