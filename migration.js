@@ -34,3 +34,22 @@ CREATE TABLE IF NOT EXISTS Series (
         console.log('Table Series created');
     }
 });
+
+
+db.run(`
+    CREATE TABLE IF NOT EXISTS Issue ( 
+    id INTEGER PRIMARY KEY, // в этом случае надо указывать праймари ки рядом с объявлением
+    name TEXT NOT NULL, 
+    issue_number INTEGER NOT NULL,
+    publication_date TEXT NOT NULL,
+    artist_id INTEGER NOT NULL,
+    series_id INTEGER NOT NULL,
+    FOREIGN KEY (artist_id) REFERENCES Artist(id),
+    FOREIGN KEY (series_id) REFERENCES Series(id)
+    );`, function(err) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Table Issue created');
+    }
+});
