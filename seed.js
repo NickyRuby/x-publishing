@@ -39,7 +39,7 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='Artist'", (e
               if (error) {
                 throw new Error(error);
               }
-n
+
               if (table) {
                 db.serialize(function() {
                   db.run(`INSERT INTO Issue (name, issue_number, publication_date, artist_id, series_id) VALUES ('The Customizable BashMan', 1, 'January 1, 1990', ${artistId}, ${seriesId})`);

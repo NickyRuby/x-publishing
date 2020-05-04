@@ -16,7 +16,7 @@ seriesRouter.get('/', (req,res,next) => {
 });
 
 const validateSeries = (req,res,next) => {
-    req.name = req.body.series.name; // надо разобраться почему так 
+    req.name = req.body.series.name; 
     req.description = req.body.series.description;
     if (!req.name || !req.description) {
         res.status(400).send()
@@ -66,7 +66,7 @@ seriesRouter.post('/', validateSeries, (req,res,next) => {
 
 
 
-seriesRouter.put('/:seriesId', validateSeries, (req,res,next) => { // !!!!!! — забыл поставить кавычкии 
+seriesRouter.put('/:seriesId', validateSeries, (req,res,next) => { 
     db.run(`UPDATE Series SET name = "${req.name}", description = "${req.description}"
         WHERE id = ${req.params.seriesId}`, function (err) {
             if (err) {
@@ -82,6 +82,28 @@ seriesRouter.put('/:seriesId', validateSeries, (req,res,next) => { // !!!!!! —
      })
 });
 
+seriesRouter.delete('/:seriesId', (req,res,next) => {
+    db.get(`SELECT * FROM Issue WHERE series_id="${req.params.seriesId}";`, (err,data) => {
+        if (err) { 
+            next(err)
+        }
+        else {
+            if (data) {
+                res.status(400).send();
+            }
+            else {
+                db.run(`DELETE FROM Series WHERE id = ${req.params.seriesId}`, function(err) {
+                    if (err) {
+                        next(err)
+                    }
+                    else {
+                        res.status(204).send();
+                    }
+                })
+            }
+        }
+    })
+});
 
 
 module.exports = seriesRouter;

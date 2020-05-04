@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Series (
 
 db.run(`
     CREATE TABLE IF NOT EXISTS Issue ( 
-    id INTEGER PRIMARY KEY, // в этом случае надо указывать праймари ки рядом с объявлением
+    id INTEGER PRIMARY KEY, 
     name TEXT NOT NULL, 
     issue_number INTEGER NOT NULL,
     publication_date TEXT NOT NULL,

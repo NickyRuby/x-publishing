@@ -39,7 +39,7 @@ const validateArtist = (req,res,next) => {
     req.biography = req.body.artist.biography;
     req.isCurrentlyEmployed = req.body.artist.isCurrentlyEmployed === 0 ? 0 : 1; 
     if (!req.name || !req.dateOfBirth || !req.biography) {
-        return res.status(400).send(); // return? почему не просто отравить статус?
+        return res.status(400).send();
     }
     else {
         next();
@@ -69,14 +69,14 @@ artistsRouter.put('/:artistId', validateArtist, (req,res,next) => {
         $dateOfBirth: req.dateOfBirth, 
         $biography: req.biography, 
         $isCurrentlyEmployed: req.isCurrentlyEmployed, 
-        $id: req.params.artistId // req.params.id вместо req.artistData.id
+        $id: req.params.artistId 
     }
 
     db.run(query, data, function (err) { 
         if (err) {
             next(err);
         } 
-            db.get("SELECT * FROM Artist WHERE id = $id;", {$id: req.params.artistId}, (err, artistData) => { // вместо this.LastID -> req.params.artistId (!!!!!!)
+            db.get("SELECT * FROM Artist WHERE id = $id;", {$id: req.params.artistId}, (err, artistData) => { 
                 if (err) {
                     next(err);
                 }

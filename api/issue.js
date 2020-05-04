@@ -80,7 +80,18 @@ issuesRouter.put('/:issueId', validateIssue, (req,res,next) => {
             })
         }
     })
- })
+ });
+
+ issuesRouter.delete('/:issueId', (req,res,next) => {
+    let query = `DELETE FROM Issue WHERE id = ${req.params.issueId}`;
+    db.run(query, function(err){
+        if (err) {
+            next(err)
+        } else {
+            res.status(204).send();
+        }
+    })
+ });
 
 
 module.exports = issuesRouter;
